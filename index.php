@@ -19,10 +19,17 @@
 <body class="bg-body-tertiary">
  <?php include 'include/menu.php'; ?>
  <div class="container" style="margin-top: 30px;">
+  <?php if(!empty($_SESSION['message'])): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <?php echo $_SESSION['message']; ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php unset($_SESSION['message']) ?>
+  <?php endif; ?>
   <h4>Home - Manage Product</h4>
   <div>
    <form action="<?php echo $base_url; ?>/product-form.php" 
-    method="post" enctype-"multipart/form-data" 
+    method="post" enctype="multipart/form-data" 
    >
     <div class="row g-3 mb-3">
 
@@ -38,7 +45,7 @@
 
      <div class="col-sm-6">
       <label for="formFile" class="form-label">Image</label>
-      <input type="file" name="product_name" class="form-control" 
+      <input type="file" name="profile_image" class="form-control" 
        value="" accept="image/png, image/jpg, image/jpeg" />
      </div>
 
