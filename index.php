@@ -6,6 +6,28 @@
  $query = mysqli_query($conn, "SELECT * FROM products");
  $rows = mysqli_num_rows($query);
 
+ // var product form
+ $result = [
+  'id' => '',
+  'product_name' => '',
+  'price' => '',
+  'detail' => '',
+  'product_image' => ''
+ ];
+
+ // product select edit
+ if(!empty($_GET['id'])){
+  $query_product = mysqli_query($conn, "SELECT * FROM products WHERE id='{$_GET['id']}'");
+  $row_product = mysqli_num_rows($query_product);
+
+  if($row_product == 0){
+    header('location:' . $base_url . '/index.php');
+  }
+
+  $result = mysqli_fetch_assoc($query_product);
+  // var_dump($result);
+ }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,34 +58,60 @@
    <form action="<?php echo $base_url; ?>/product-form.php" 
     method="post" enctype="multipart/form-data" 
    >
+    <input type="hidden" name="id" value="<?php echo $result['id']; ?>" />
     <div class="row g-3 mb-3">
 
      <div class="col-sm-6">
       <label class="form-label">Product Name</label>
-      <input type="text" name="product_name" class="form-control" value="" />
+      <input type="text" name="product_name" class="form-control" 
+       value="<?php echo $result['product_name'] ?>" />
      </div>
 
      <div class="col-sm-6">
       <label class="form-label">Price</label>
-      <input type="text" name="price" class="form-control" value="" />
+      <input type="text" name="price" class="form-control" 
+        value="<?php echo $result['price'] ?>" />
      </div>
 
      <div class="col-sm-6">
-      <label for="formFile" class="form-label">Image</label>
-      <input type="file" name="profile_image" class="form-control" 
-       value="" accept="image/png, image/jpg, image/jpeg" />
+      <?php if(!empty($result['profile_image'])): ?>
+        <div>
+          <img 
+            src="<?php echo $base_url; ?>/upload_image/<?php echo $result['profile_image']; ?>"
+            width="100" height="100" alt="Product Image" 
+          />
+        </div>
+      <?php endif; ?> 
+        <label for="formFile" class="form-label">Image</label>
+        <input type="file" name="profile_image" class="form-control" 
+          value="" accept="image/png, image/jpg, image/jpeg" />
      </div>
 
      <div class="col-sm-12">
       <label class="form-label">Detail</label>
-      <textarea name="detail" class="form-control" rows="3"></textarea>
+      <textarea name="detail" class="form-control" rows="3" > 
+        <?php echo $result['detail'] ?>
+      </textarea>
      </div>
     </div>
-    
-    <button class="btn btn-primary" type="submit">
-     <i class="fa-regular fa-floppy-disk me-1"></i>
-     Create
-    </button>
+    <?php if(empty($result['id'])): ?>
+      <button class="btn btn-primary" type="submit">
+        <i class="fa-regular fa-floppy-disk me-1"></i>
+        Create
+      </button>
+    <?php else: ?>
+      <button class="btn btn-primary" type="submit">
+        <i class="fa-regular fa-floppy-disk me-1"></i>
+        Update
+      </button>
+    <?php endif; ?>
+
+    <a role="button" class="btn btn-secondary" type="button"
+      href="<?php echo $base_url; ?>/index.php"
+    >
+    <i class="fa-solid fa-rotate-left me-1"></i>
+     Cancel
+    </a>
     <hr class="my-4">
    </form>
   </div>
