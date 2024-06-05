@@ -46,7 +46,7 @@
   <h4>Cart</h4>
   <div class="row">
    <div class="col-12">
-    <form>
+    <form action="<?php echo $base_url; ?>/cart-update.php" method="post" >
       <table class="table table-bordered border-info" >
         <thead>
           <tr>
@@ -86,6 +86,7 @@
                   </td>
                   <td>
                    <input type="number" 
+                    name="product[<?php echo $product['id']; ?>][quantity]"
                     value="<?php echo $_SESSION['cart'][$product['id']]; ?>" 
                     class="form-control" 
                    />
