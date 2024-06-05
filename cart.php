@@ -104,7 +104,7 @@
                 <button type="submit" class="btn btn-lg btn-success" >
                   Update Cart
                 </button>
-                <a href="<?php echo $base_url; ?>" class="btn btn-lg btn-primary" >
+                <a href="<?php echo $base_url; ?>/checkout.php" class="btn btn-lg btn-primary" >
                   Checkout Order
                 </a>
                </td>
