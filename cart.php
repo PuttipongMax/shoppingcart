@@ -46,7 +46,8 @@
   <h4>Cart</h4>
   <div class="row">
    <div class="col-12">
-   <table class="table table-bordered border-info" >
+    <form>
+      <table class="table table-bordered border-info" >
         <thead>
           <tr>
             <th style="width: 100px;">Image</th>
@@ -92,12 +93,20 @@
                   <td><?php echo number_format($product['price'] * $_SESSION['cart'][$product['id']], 2); ?></td>
                   <td>                 
                    <a onclick="return confirm('Are your sure you want to delete');"
-                    role="button" href="<?php echo $base_url ?>/product-delete.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-danger">
+                    role="button" href="<?php echo $base_url ?>/cart-delete.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-danger">
                      <i class="fa-solid fa-trash-can me-1"></i>Delete
                    </a>
                   </td>
               </tr>  
-               <?php endwhile; ?>   
+              <?php endwhile; ?>   
+               <td colspan="6" class="text-end" >
+                <button type="submit" class="btn btn-lg btn-success" >
+                  Update Cart
+                </button>
+                <a href="<?php echo $base_url; ?>" class="btn btn-lg btn-primary" >
+                  Checkout Order
+                </a>
+               </td>
             <?php else: ?>
             <tr>
               <td colspan="6" >
@@ -107,6 +116,7 @@
           <?php endif; ?>
         </tbody>    
       </table>
+    </form>
    </div>
   </div>
  </div>
