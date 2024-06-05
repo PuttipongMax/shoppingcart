@@ -4,10 +4,8 @@
   <li class="nav-item"><a class="nav-link" href="<?php echo $base_url; ?>/product-list.php">Product List</a></li>
   <li class="nav-item">
    <a class="nav-link" href="<?php echo $base_url; ?>/cart.php">
-    Cart (<?php echo count($_SESSION['cart']); ?>)
+    Cart ()
    </a>
   </li>
  </ul>
 </header>
-
-<!--  -->
